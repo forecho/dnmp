@@ -24,6 +24,16 @@ mv phpmyadmin-RELEASE_4_7_3 phpmyadmind && cd phpmyadmind
 cp config.sample.inc.php config.inc.php
 composer install
 
+# git 初始化
+
+git config --global core.editor "vim"
+git config --global user.name "forecho"
+git config --global user.email caizhenghai@gmail.com
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+
 ## 处理 nginx
 ## 强制覆盖
 cp -f nginx/default /etc/nginx/sites-available/default
