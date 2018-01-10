@@ -27,5 +27,5 @@ composer install
 ## 处理 nginx
 ## 强制覆盖
 cp -f nginx/defult /etc/nginx/sites-available/defult
-cp -f nginx/http.conf.demo /etc/nginx/conf.d/
-cp -f nginx/https.conf.demo /etc/nginx/conf.d/
+cp nginx/http.conf.demo /etc/nginx/conf.d/
+cp nginx/https.conf.demo /etc/nginx/conf.d/
