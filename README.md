@@ -7,7 +7,7 @@
 
 ```sh
 $ git clone https://github.com/forecho/unmp.git
-$ sudo chmod +x init.sh
+$ cd unmp && sudo chmod +x init.sh
 $ ./init.sh
 ```
 
