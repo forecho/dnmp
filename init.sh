@@ -19,8 +19,7 @@ locale-gen zh_CN.UTF-8
 # utility to be able to use apt-add-repository
 
 # php7
-# apt-get install software-properties-common
-sodu apt-get install python-software-properties build-essential -y
+sodu apt-get install python-software-properties build-essential software-properties-common -y
 LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php -y
 sodu apt-get update > /dev/null
 
