@@ -1,3 +1,29 @@
+sodu rm -r /etc/apt/sources.list
+
+echo "deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse" >> sodu /etc/apt/sources.list
+
+
+locale-gen zh_CN.UTF-8
+
+# ------- PPA's -------
+
+# utility to be able to use apt-add-repository
+
+# php7
+# apt-get install software-properties-common
+sodu apt-get install python-software-properties build-essential -y
+LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php -y
+sodu apt-get update > /dev/null
+
 ## 安装 nginx mysql php
 sudo apt-get update -y
 sudo apt-get install -y nginx
