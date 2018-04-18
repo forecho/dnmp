@@ -44,6 +44,7 @@ composer global require "fxp/composer-asset-plugin:^1.4.0"
 # 安装 phpmyadmin
 mkdir -p /home/www/default && cd /home/www/default
 wget https://github.com/phpmyadmin/phpmyadmin/archive/RELEASE_4_7_3.zip
+sudo apt-get autoremove -y
 sudo apt-get install -y unzip && unzip RELEASE_4_7_3.zip 
 mv phpmyadmin-RELEASE_4_7_3 phpmyadmind && cd phpmyadmind
 cp config.sample.inc.php config.inc.php
