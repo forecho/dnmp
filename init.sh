@@ -33,11 +33,11 @@ sudo apt-get install -y mysql-server
 sudo apt-get install -y autojump
 # 添加 source /usr/share/autojump/autojump.bash
 echo "source /usr/share/autojump/autojump.bash" > ~/.bashrc
-source ~/.bashrc
 
 # 安装 composer
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
+composer config -g repo.packagist composer https://packagist.laravel-china.org
 composer global require hirak/prestissimo
 composer global require "fxp/composer-asset-plugin:^1.4.0"
 
