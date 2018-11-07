@@ -9,6 +9,7 @@
 $ git clone https://github.com/forecho/unmp.git
 $ cd unmp && sudo chmod +x init.sh
 $ ./init.sh
+$ source ~/.bashrc
 ```
 
 ## 文件说明
