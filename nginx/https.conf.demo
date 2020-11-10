@@ -3,42 +3,30 @@ server {
     client_max_body_size 128M;
 
     listen 80; ## listen for ipv4
-    listen 443 ssl http2;
-
-    server_name https.com; ## 域名
+    server_name https.com;
     index index.html index.htm index.php;
-    root /home/www/https; ## 目录
+    root /home/www/https;
 
-    # HTTPS 跳转
+    # HTTPS
     if ($scheme = http) {
         return 301 https://$server_name$request_uri;
     }
 
-    # www 跳转
+    # www
     if ($host = 'www.https.com' ) {
         rewrite ^/(.*)$ https://https.com/$1 permanent;
     }
 
     ## ssl
-    ssl on;
-    ssl_certificate /etc/dehydrated/certs/https.com/fullchain.pem;
-    ssl_certificate_key /etc/dehydrated/certs/https.com/privkey.pem;
-    ssl_session_timeout 1d;
-    ssl_session_cache shared:SSL:50m;
-    ssl_session_tickets off;
-
-    ## ssl pem
-    ssl_dhparam /etc/ssl/certs/dhparam.pem;
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;## omit SSLv3 because of POODLE (CVE-2014-3566)
-    ssl_stapling on;
-    ssl_ciphers "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA";
-    ssl_prefer_server_ciphers on;
-    add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/letsencrypt/live/api.cashwarden.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.cashwarden.com/privkey.pem;
 
     location ~ \.php$ {
         try_files $uri =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
@@ -57,10 +45,5 @@ server {
 
     location ~ .*\.(js|css)?$ {
         expires 1h;
-    }
-
-    location /.well-known/acme-challenge {
-        allow all;
-        alias /var/www/dehydrated/;
     }
 }

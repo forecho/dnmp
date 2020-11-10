@@ -3,14 +3,14 @@ server {
     client_max_body_size 128M;
 
     listen 80; ## listen for ipv4
-    server_name site.com; ## 域名
+    server_name site.com;
     index index.html index.htm index.php;
-    root /home/www/site; ## 目录
+    root /home/www/site;
 
     location ~ \.php$ {
         try_files $uri =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
